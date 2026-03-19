@@ -271,7 +271,7 @@ const HomePage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 bg-gradient-to-b from-slate-100 to-white">
+      <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 bg-gradient-to-b from-slate-100 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -565,7 +565,7 @@ const ServicesPage = ({ onNavigate }: { onNavigate: (page: string) => void }) =>
   ];
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-28 md:pt-40 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mb-12 md:mb-20">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-secondary mb-8">Nos Services</h1>
@@ -705,7 +705,7 @@ const ServicesPage = ({ onNavigate }: { onNavigate: (page: string) => void }) =>
 
 const AboutPage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-28 md:pt-40 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
           <motion.div
@@ -903,7 +903,7 @@ const AboutPage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
 
 const ContactPage = () => {
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-28 md:pt-40 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div>
