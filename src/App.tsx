@@ -29,6 +29,67 @@ import {
   ChevronUp
 } from 'lucide-react';
 
+// --- Constants & Data ---
+
+const SERVICES_DATA = [
+  {
+    id: "audit-diagnostic",
+    icon: <Search size={40} />,
+    title: "Audit & Diagnostic",
+    desc: "Analyse approfondie de vos processus actuels et identification des points de friction pour définir vos besoins réels.",
+    fullDesc: "L'audit est la première étape cruciale de toute transformation numérique réussie. Chez Kyros, nous plongeons au cœur de votre organisation pour comprendre comment l'information circule, où se situent les goulots d'étranglement et quels sont les outils qui freinent votre croissance au lieu de la porter.",
+    features: ["Analyse des flux de travail", "Inventaire des outils existants", "Définition du cahier des charges"],
+    process: [
+      { title: "Immersion", desc: "Entretiens avec les parties prenantes et observation des processus métiers." },
+      { title: "Analyse technique", desc: "Évaluation de l'architecture logicielle actuelle et de l'interopérabilité." },
+      { title: "Rapport de diagnostic", desc: "Identification des risques, des opportunités et des priorités d'investissement." }
+    ],
+    benefits: ["Vision claire de l'existant", "Identification des gains de productivité", "Réduction des coûts cachés"]
+  },
+  {
+    id: "sourcing-benchmark",
+    icon: <Settings size={40} />,
+    title: "Sourcing & Benchmark",
+    desc: "Recherche et comparaison des meilleures solutions du marché adaptées à votre secteur et à votre budget.",
+    fullDesc: "Le marché des logiciels est vaste et complexe. Notre expertise consiste à filtrer les centaines de solutions disponibles pour ne retenir que celles qui correspondent réellement à vos contraintes techniques, fonctionnelles et financières.",
+    features: ["Veille technologique", "Comparatif fonctionnel", "Analyse des coûts (TCO)"],
+    process: [
+      { title: "Veille marché", desc: "Identification des éditeurs leaders et des nouveaux entrants innovants." },
+      { title: "Grille d'évaluation", desc: "Création d'un référentiel de comparaison basé sur vos besoins spécifiques." },
+      { title: "Shortlist", desc: "Sélection des 3 à 5 solutions les plus pertinentes pour votre entreprise." }
+    ],
+    benefits: ["Gain de temps considérable", "Accès aux meilleures solutions du marché", "Vision objective des forces et faiblesses"]
+  },
+  {
+    id: "aide-au-choix",
+    icon: <Users size={40} />,
+    title: "Aide au Choix",
+    desc: "Accompagnement lors des démonstrations éditeurs et aide à la décision finale basée sur des critères objectifs.",
+    fullDesc: "Choisir un logiciel est un engagement sur le long terme. Nous vous accompagnons dans la phase critique des démonstrations et des négociations pour vous assurer de faire le choix le plus rationnel et le plus pérenne.",
+    features: ["Grille d'évaluation", "Organisation des démos", "Négociation contractuelle"],
+    process: [
+      { title: "Scénarios de démo", desc: "Préparation de cas d'usage réels pour tester les logiciels en conditions réelles." },
+      { title: "Analyse des offres", desc: "Décryptage des propositions commerciales et des coûts de licence." },
+      { title: "Aide à la décision", desc: "Synthèse comparative et recommandation finale argumentée." }
+    ],
+    benefits: ["Décision basée sur des faits", "Sécurisation de l'investissement", "Optimisation des conditions contractuelles"]
+  },
+  {
+    id: "accompagnement-deploiement",
+    icon: <CheckCircle2 size={40} />,
+    title: "Accompagnement Déploiement",
+    desc: "Suivi de la mise en œuvre pour garantir que le logiciel choisi est correctement adopté par vos équipes.",
+    fullDesc: "Le succès d'un logiciel ne dépend pas seulement de ses fonctionnalités, mais de son adoption par les utilisateurs. Nous faisons le pont entre vous et l'éditeur pour garantir un déploiement fluide et une conduite du changement efficace.",
+    features: ["Suivi de projet", "Gestion du changement", "Vérification de conformité"],
+    process: [
+      { title: "Pilotage", desc: "Suivi du planning et coordination avec l'intégrateur ou l'éditeur." },
+      { title: "Formation", desc: "Accompagnement des équipes dans la prise en main du nouvel outil." },
+      { title: "Recette", desc: "Vérification de la conformité de la solution par rapport au cahier des charges." }
+    ],
+    benefits: ["Respect des délais et du budget", "Adoption rapide par les collaborateurs", "Garantie de conformité finale"]
+  }
+];
+
 // --- Components ---
 
 const BackToTop = () => {
@@ -267,7 +328,86 @@ const Footer = ({ setActivePage }: { setActivePage: (page: string) => void }) =>
 
 // --- Pages ---
 
-const HomePage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
+const ServiceDetailPage = ({ serviceId, onNavigate }: { serviceId: string, onNavigate: (page: string) => void }) => {
+  const service = SERVICES_DATA.find(s => s.id === serviceId);
+  
+  if (!service) return null;
+
+  return (
+    <div className="pt-28 md:pt-40 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <button 
+          onClick={() => onNavigate('services')}
+          className="flex items-center gap-2 text-primary font-bold mb-12 hover:gap-3 transition-all"
+        >
+          <ArrowRight size={20} className="rotate-180" /> Retour aux services
+        </button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-24">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <div className="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mb-8">
+              {service.icon}
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-secondary mb-8">{service.title}</h1>
+            <p className="text-xl text-slate-500 leading-relaxed mb-10">
+              {service.fullDesc}
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {service.benefits.map((benefit, idx) => (
+                <div key={idx} className="flex items-center gap-3 text-secondary font-bold">
+                  <div className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 size={14} />
+                  </div>
+                  {benefit}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-slate-50 rounded-[40px] p-10 border border-slate-100"
+          >
+            <h3 className="text-2xl font-bold text-secondary mb-8">Notre Processus</h3>
+            <div className="space-y-10">
+              {service.process.map((step, idx) => (
+                <div key={idx} className="flex gap-6">
+                  <div className="flex-shrink-0 w-10 h-10 bg-white border-2 border-primary text-primary rounded-full flex items-center justify-center font-bold">
+                    {idx + 1}
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold text-secondary mb-2">{step.title}</h4>
+                    <p className="text-slate-500">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="bg-secondary rounded-[40px] p-12 md:p-20 text-white text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">Besoin de ce service pour votre entreprise ?</h2>
+          <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+            Contactez-nous pour une première discussion gratuite sur vos enjeux et vos besoins spécifiques.
+          </p>
+          <button 
+            onClick={() => onNavigate('contact')}
+            className="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-opacity-90 transition-all shadow-xl shadow-primary/20 inline-flex items-center gap-3"
+          >
+            Démarrer la discussion <ArrowRight size={20} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const HomePage = ({ onNavigate, onSelectService }: { onNavigate: (page: string) => void, onSelectService: (id: string) => void }) => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -409,6 +549,46 @@ const HomePage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
         </div>
       </section>
 
+      {/* Services Preview Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+            <div className="max-w-2xl">
+              <h2 className="text-sm font-bold text-primary uppercase tracking-[0.2em] mb-4">Nos Services</h2>
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary">Comment nous vous accompagnons</h3>
+            </div>
+            <button 
+              onClick={() => onNavigate('services')}
+              className="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all"
+            >
+              Voir tous les services <ArrowRight size={20} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {SERVICES_DATA.map((service, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ y: -10 }}
+                onClick={() => onSelectService(service.id)}
+                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer group"
+              >
+                <div className="w-14 h-14 bg-slate-50 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                  {React.cloneElement(service.icon as React.ReactElement, { size: 28 })}
+                </div>
+                <h4 className="text-xl font-bold text-secondary mb-4">{service.title}</h4>
+                <p className="text-sm text-slate-500 mb-6 line-clamp-3">
+                  {service.desc}
+                </p>
+                <div className="text-primary text-sm font-bold flex items-center gap-2">
+                  Détails <ArrowRight size={16} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Methodology Section */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -536,34 +716,7 @@ const HomePage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
   );
 };
 
-const ServicesPage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
-  const services = [
-    {
-      icon: <Search size={40} />,
-      title: "Audit & Diagnostic",
-      desc: "Analyse approfondie de vos processus actuels et identification des points de friction pour définir vos besoins réels.",
-      features: ["Analyse des flux de travail", "Inventaire des outils existants", "Définition du cahier des charges"]
-    },
-    {
-      icon: <Settings size={40} />,
-      title: "Sourcing & Benchmark",
-      desc: "Recherche et comparaison des meilleures solutions du marché adaptées à votre secteur et à votre budget.",
-      features: ["Veille technologique", "Comparatif fonctionnel", "Analyse des coûts (TCO)"]
-    },
-    {
-      icon: <Users size={40} />,
-      title: "Aide au Choix",
-      desc: "Accompagnement lors des démonstrations éditeurs et aide à la décision finale basée sur des critères objectifs.",
-      features: ["Grille d'évaluation", "Organisation des démos", "Négociation contractuelle"]
-    },
-    {
-      icon: <CheckCircle2 size={40} />,
-      title: "Accompagnement Déploiement",
-      desc: "Suivi de la mise en œuvre pour garantir que le logiciel choisi est correctement adopté par vos équipes.",
-      features: ["Suivi de projet", "Gestion du changement", "Vérification de conformité"]
-    }
-  ];
-
+const ServicesPage = ({ onNavigate, onSelectService }: { onNavigate: (page: string) => void, onSelectService: (id: string) => void }) => {
   return (
     <div className="pt-28 md:pt-40 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -575,14 +728,15 @@ const ServicesPage = ({ onNavigate }: { onNavigate: (page: string) => void }) =>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-24 md:mb-32">
-          {services.map((service, idx) => (
+          {SERVICES_DATA.map((service, idx) => (
             <motion.div 
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="group p-12 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:border-primary/20 transition-all duration-500"
+              className="group p-12 rounded-[40px] bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:border-primary/20 transition-all duration-500 cursor-pointer"
+              onClick={() => onSelectService(service.id)}
             >
               <div className="w-20 h-20 bg-slate-50 text-primary rounded-3xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-500">
                 {service.icon}
@@ -591,16 +745,9 @@ const ServicesPage = ({ onNavigate }: { onNavigate: (page: string) => void }) =>
               <p className="text-lg text-slate-500 mb-8 leading-relaxed">
                 {service.desc}
               </p>
-              <ul className="space-y-4">
-                {service.features.map((feature, fIdx) => (
-                  <li key={fIdx} className="flex items-center gap-3 text-secondary font-medium">
-                    <div className="w-6 h-6 bg-accent/10 text-accent rounded-full flex items-center justify-center">
-                      <ChevronRight size={14} />
-                    </div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <div className="flex items-center gap-2 text-primary font-bold group-hover:gap-3 transition-all">
+                En savoir plus <ArrowRight size={20} />
+              </div>
             </motion.div>
           ))}
         </div>
@@ -969,27 +1116,39 @@ const ContactPage = () => {
 
 export default function App() {
   const [activePage, setActivePage] = useState('home');
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
   // Scroll to top on page change
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [activePage]);
+  }, [activePage, selectedServiceId]);
+
+  const handleSelectService = (id: string) => {
+    setSelectedServiceId(id);
+    setActivePage('service-detail');
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
+      <Navbar activePage={activePage} setActivePage={(page) => {
+        setActivePage(page);
+        setSelectedServiceId(null);
+      }} />
       
       <main className="flex-grow">
         <AnimatePresence mode="wait">
           <motion.div
-            key={activePage}
+            key={activePage + (selectedServiceId || '')}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            {activePage === 'home' && <HomePage onNavigate={setActivePage} />}
-            {activePage === 'services' && <ServicesPage onNavigate={setActivePage} />}
+            {activePage === 'home' && <HomePage onNavigate={setActivePage} onSelectService={handleSelectService} />}
+            {activePage === 'services' && <ServicesPage onNavigate={setActivePage} onSelectService={handleSelectService} />}
+            {activePage === 'service-detail' && selectedServiceId && (
+              <ServiceDetailPage serviceId={selectedServiceId} onNavigate={setActivePage} />
+            )}
             {activePage === 'about' && <AboutPage onNavigate={setActivePage} />}
             {activePage === 'contact' && <ContactPage />}
           </motion.div>
