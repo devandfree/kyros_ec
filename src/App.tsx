@@ -518,7 +518,7 @@ const HomePage = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="text-white max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Prêt à moderniser vos outils ?</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Prêt à transformer votre entreprise ?</h2>
               <p className="text-xl text-white/80">
                 Discutons ensemble de vos besoins et trouvons la solution qui fera passer votre entreprise au niveau supérieur.
               </p>
