@@ -1081,30 +1081,22 @@ const ContactPage = () => {
             </div>
           </div>
 
-          <div className="bg-white p-10 md:p-12 rounded-[40px] shadow-2xl border border-slate-100">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-secondary uppercase tracking-wider">Nom complet</label>
-                  <input type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-colors" placeholder="Jean Dupont" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-secondary uppercase tracking-wider">Entreprise</label>
-                  <input type="text" className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-colors" placeholder="Ma PME" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-secondary uppercase tracking-wider">Email professionnel</label>
-                <input type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-colors" placeholder="jean@entreprise.com" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-secondary uppercase tracking-wider">Message</label>
-                <textarea rows={4} className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-primary transition-colors" placeholder="Décrivez brièvement votre besoin..."></textarea>
-              </div>
-              <button className="w-full bg-primary text-white py-5 rounded-2xl font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20">
-                Envoyer ma demande
-              </button>
-            </form>
+          <div className="bg-white p-12 rounded-[40px] shadow-2xl border border-slate-100 text-center">
+            <div className="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8">
+              <Clock size={40} />
+            </div>
+            <h2 className="text-3xl font-bold text-secondary mb-4">Réservez votre diagnostic</h2>
+            <p className="text-lg text-slate-500 mb-10 max-w-sm mx-auto">
+              Choisissez un créneau de 30 minutes pour discuter de votre projet et de vos enjeux.
+            </p>
+            <a 
+              href="#" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20"
+            >
+              Prendre rendez-vous sur Calendly <ArrowRight size={20} />
+            </a>
           </div>
         </div>
       </div>
