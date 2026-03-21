@@ -28,7 +28,10 @@ import {
   Heart,
   Target,
   Eye,
-  ChevronUp
+  ChevronUp,
+  Facebook,
+  Linkedin,
+  Twitter,
 } from 'lucide-react';
 
 // --- Constants & Data ---
@@ -1151,6 +1154,27 @@ const ContactPage = () => {
             >
               Prendre rendez-vous sur Calendly <ArrowRight size={20} />
             </a>
+
+            <div className="mt-12 pt-8 border-t border-slate-100">
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Suivez-nous sur les réseaux</p>
+              <div className="flex justify-center gap-6">
+                {[
+                  { icon: <Linkedin size={24} />, href: "#", label: "LinkedIn", color: "hover:text-[#0077b5] hover:bg-[#0077b5]/10" },
+                  { icon: <Facebook size={24} />, href: "#", label: "Facebook", color: "hover:text-[#1877f2] hover:bg-[#1877f2]/10" },
+                  { icon: <Twitter size={24} />, href: "#", label: "X (Twitter)", color: "hover:text-black hover:bg-black/10" }
+                ].map((social, i) => (
+                  <motion.a
+                    key={i}
+                    href={social.href}
+                    whileHover={{ y: -5 }}
+                    className={`w-14 h-14 rounded-2xl flex items-center justify-center text-slate-400 transition-all duration-300 border border-slate-100 bg-slate-50/50 ${social.color}`}
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
