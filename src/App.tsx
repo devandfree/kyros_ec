@@ -14,6 +14,8 @@ import {
   ShieldCheck,
   Zap,
   MessageSquare,
+  Phone,
+  MessageCircle,
   ChevronDown,
   FileText,
   Layout,
@@ -307,10 +309,18 @@ const Footer = ({ setActivePage }: { setActivePage: (page: string) => void }) =>
 
       <div>
         <h4 className="font-bold mb-4 text-white">Contact</h4>
-        <ul className="space-y-2 text-slate-400 text-sm">
+        <ul className="space-y-3 text-slate-400 text-sm">
           <li className="flex items-center gap-3">
             <MessageSquare size={16} className="text-primary" />
             contact@kyros-conseil.com
+          </li>
+          <li className="flex items-center gap-3">
+            <Phone size={16} className="text-primary" />
+            +33 1 00 00 00 00
+          </li>
+          <li className="flex items-center gap-3">
+            <MessageCircle size={16} className="text-emerald-500" />
+            WhatsApp
           </li>
           <li className="flex items-center gap-3">
             <Users size={16} className="text-primary" />
@@ -688,6 +698,43 @@ const HomePage = ({ onNavigate, onSelectService }: { onNavigate: (page: string) 
             ].map((faq, i) => (
               <FAQItem key={i} question={faq.q} answer={faq.a} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Contact Section */}
+      <section className="py-20 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="p-8 rounded-[32px] bg-slate-50 border border-slate-100 flex items-center gap-6 group cursor-pointer"
+              onClick={() => window.location.href = 'tel:+33100000000'}
+            >
+              <div className="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+                <Phone size={32} />
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">Appels Directs</h4>
+                <p className="text-2xl font-bold text-secondary">+33 1 00 00 00 00</p>
+                <p className="text-sm text-slate-500">Disponible du lun. au ven. 9h-18h</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="p-8 rounded-[32px] bg-emerald-50 border border-emerald-100 flex items-center gap-6 group cursor-pointer"
+              onClick={() => window.open('https://wa.me/33100000000', '_blank')}
+            >
+              <div className="w-16 h-16 bg-emerald-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-200 group-hover:scale-110 transition-transform">
+                <MessageCircle size={32} />
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-emerald-600 uppercase tracking-widest mb-1">WhatsApp</h4>
+                <p className="text-2xl font-bold text-secondary">Discuter sur WhatsApp</p>
+                <p className="text-sm text-slate-500">Réponse rapide garantie</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -1070,12 +1117,21 @@ const ContactPage = () => {
                 </div>
               </div>
               <div className="flex items-start gap-6">
-                <div className="w-14 h-14 bg-accent/10 text-accent rounded-2xl flex items-center justify-center shrink-0">
-                  <Users size={28} />
+                <div className="w-14 h-14 bg-emerald-50/50 text-emerald-500 rounded-2xl flex items-center justify-center shrink-0 border border-emerald-100">
+                  <MessageCircle size={28} />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-secondary mb-1">Réseaux Sociaux</h4>
-                  <p className="text-slate-500">Suivez-nous sur LinkedIn pour nos conseils experts.</p>
+                  <h4 className="text-xl font-bold text-secondary mb-1">WhatsApp</h4>
+                  <p className="text-slate-500">Discutez avec nous en direct</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-6">
+                <div className="w-14 h-14 bg-blue-50/50 text-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-100">
+                  <Phone size={28} />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-secondary mb-1">Téléphone</h4>
+                  <p className="text-slate-500">+33 1 00 00 00 00</p>
                 </div>
               </div>
             </div>
@@ -1091,8 +1147,6 @@ const ContactPage = () => {
             </p>
             <a 
               href="#" 
-              target="_blank" 
-              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20"
             >
               Prendre rendez-vous sur Calendly <ArrowRight size={20} />
