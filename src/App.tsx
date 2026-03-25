@@ -275,7 +275,7 @@ const FAQItem: React.FC<{ question: string, answer: string }> = ({ question, ans
   );
 };
 
-const Footer = ({ setActivePage }: { setActivePage: (page: string) => void }) => (
+const Footer = ({ setActivePage, onSelectService }: { setActivePage: (page: string) => void, onSelectService: (id: string) => void }) => (
   <footer className="bg-secondary text-white py-12">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div className="col-span-1 md:col-span-1">
@@ -303,10 +303,10 @@ const Footer = ({ setActivePage }: { setActivePage: (page: string) => void }) =>
       <div>
         <h4 className="font-bold mb-4 text-white">Services</h4>
         <ul className="space-y-2 text-slate-400 text-sm">
-          <li><a href="#" className="hover:text-primary transition-colors">Audit & Diagnostic</a></li>
-          <li><a href="#" className="hover:text-primary transition-colors">Sourcing Logiciel</a></li>
-          <li><a href="#" className="hover:text-primary transition-colors">Aide au Choix</a></li>
-          <li><a href="#" className="hover:text-primary transition-colors">Accompagnement Déploiement</a></li>
+          <li><button onClick={() => onSelectService('audit-diagnostic')} className="hover:text-primary transition-colors text-left">Audit & Diagnostic</button></li>
+          <li><button onClick={() => onSelectService('sourcing-benchmark')} className="hover:text-primary transition-colors text-left">Sourcing Logiciel</button></li>
+          <li><button onClick={() => onSelectService('aide-au-choix')} className="hover:text-primary transition-colors text-left">Aide au Choix</button></li>
+          <li><button onClick={() => onSelectService('accompagnement-deploiement')} className="hover:text-primary transition-colors text-left">Accompagnement Déploiement</button></li>
         </ul>
       </div>
 
@@ -319,11 +319,11 @@ const Footer = ({ setActivePage }: { setActivePage: (page: string) => void }) =>
           </li>
           <li className="flex items-center gap-3">
             <Phone size={16} className="text-primary" />
-            +33 1 00 00 00 00
+            <a href="tel:+237622186389" className="hover:text-primary transition-colors">+237 622 18 63 89</a>
           </li>
           <li className="flex items-center gap-3">
             <MessageCircle size={16} className="text-emerald-500" />
-            WhatsApp
+            <a href="https://wa.me/237622186389" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-500 transition-colors">WhatsApp</a>
           </li>
           <li className="flex items-center gap-3">
             <Users size={16} className="text-primary" />
@@ -719,7 +719,7 @@ const HomePage = ({ onNavigate, onSelectService }: { onNavigate: (page: string) 
               </div>
               <div>
                 <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-1">Appels Directs</h4>
-                <p className="text-2xl font-bold text-secondary">+33 1 00 00 00 00</p>
+                <a href="tel:+237622186389" className="text-2xl font-bold text-secondary hover:text-primary transition-colors">+237 622 18 63 89</a>
                 <p className="text-sm text-slate-500">Disponible du lun. au ven. 9h-18h</p>
               </div>
             </motion.div>
@@ -1119,22 +1119,27 @@ const ContactPage = () => {
                   <p className="text-slate-500">contact@kyros-conseil.com</p>
                 </div>
               </div>
-              <div className="flex items-start gap-6">
-                <div className="w-14 h-14 bg-emerald-50/50 text-emerald-500 rounded-2xl flex items-center justify-center shrink-0 border border-emerald-100">
+              <a 
+                href="https://wa.me/237622186389" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-start gap-6 group"
+              >
+                <div className="w-14 h-14 bg-emerald-50/50 text-emerald-500 rounded-2xl flex items-center justify-center shrink-0 border border-emerald-100 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                   <MessageCircle size={28} />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-secondary mb-1">WhatsApp</h4>
+                  <h4 className="text-xl font-bold text-secondary mb-1 group-hover:text-emerald-500 transition-colors">WhatsApp</h4>
                   <p className="text-slate-500">Discutez avec nous en direct</p>
                 </div>
-              </div>
+              </a>
               <div className="flex items-start gap-6">
                 <div className="w-14 h-14 bg-blue-50/50 text-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-100">
                   <Phone size={28} />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-secondary mb-1">Téléphone</h4>
-                  <p className="text-slate-500">+33 1 00 00 00 00</p>
+                  <a href="tel:+237622186389" className="text-slate-500 hover:text-primary transition-colors">+237 622 18 63 89</a>
                 </div>
               </div>
             </div>
@@ -1225,7 +1230,7 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      <Footer setActivePage={setActivePage} />
+      <Footer setActivePage={setActivePage} onSelectService={handleSelectService} />
       <BackToTop />
     </div>
   );
